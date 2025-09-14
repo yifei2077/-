@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点进来有惊喜</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B8B',
+                        secondary: '#6B9FFF',
+                        neutral: '#F8F9FA',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .option-hover {
+                @apply transition-all duration-300 hover:scale-105 hover:shadow-lg;
+            }
+            .bounce-in {
+                animation: bounceIn 0.5s ease forwards;
+            }
+            @keyframes bounceIn {
+                0% { transform: scale(0.3); opacity: 0; }
+                50% { transform: scale(1.05); }
+                70% { transform: scale(0.9); }
+                100% { transform: scale(1); opacity: 1; }
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-pink-50 to-blue-50 flex flex-col items-center justify-center p-4">
+    <!-- 页面容器 -->
+    <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 md:p-10 bounce-in relative overflow-hidden">
+        <!-- 问题标题 -->
+        <div class="text-center mb-10">
+            <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-bold text-gray-800 mb-2 relative inline-block">
+                你是小猪吗
+                <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></span>
+            </h2>
+            <p class="text-gray-500 mt-4">请选择一个选项</p>
+        </div>
+
+        <!-- 选项区域 -->
+        <div class="flex flex-col md:flex-row gap-4 mb-6">
+            <!-- 是 选项 -->
+            <button id="yesBtn" class="option-hover flex-1 bg-primary text-white py-4 px-6 rounded-xl font-semibold text-lg flex items-center justify-center">
+                <i class="fa fa-check-circle mr-2"></i> 是
+            </button>
+            
+            <!-- 不是 选项 -->
+            <button id="noBtn" class="option-hover flex-1 bg-secondary text-white py-4 px-6 rounded-xl font-semibold text-lg flex items-center justify-center">
+                <i class="fa fa-times-circle mr-2"></i> 不是
+            </button>
+        </div>
+
+        <!-- 提示信息区域 -->
+        <div id="message" class="hidden text-center py-6 px-4 rounded-xl mt-6 text-lg font-medium"></div>
+
+        <!-- 装饰元素 -->
+        <div class="absolute -top-6 -left-6 w-12 h-12 bg-primary/20 rounded-full blur-md"></div>
+        <div class="absolute -bottom-8 -right-8 w-16 h-16 bg-secondary/20 rounded-full blur-md"></div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="mt-8 text-gray-400 text-sm">
+        <p>快点 快点♥</p>
+    </footer>
+
+    <script>
+        // 获取DOM元素
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const message = document.getElementById('message');
+
+        // 点击"是"按钮的处理函数
+        yesBtn.addEventListener('click', () => {
+            message.textContent = '小猪，你是小猪吗你就选';
+            message.className = 'text-center py-6 px-4 rounded-xl mt-6 text-lg font-medium bg-primary/10 text-primary bounce-in';
+            message.style.display = 'block';
+            
+            // 滚动到消息区域（在小屏幕上）
+            message.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+
+        // 点击"不是"按钮的处理函数
+        noBtn.addEventListener('click', () => {
+            message.textContent = '你真不是吗你就选';
+            message.className = 'text-center py-6 px-4 rounded-xl mt-6 text-lg font-medium bg-secondary/10 text-secondary bounce-in';
+            message.style.display = 'block';
+            
+            // 滚动到消息区域（在小屏幕上）
+            message.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+    </script>
+</body>
+</html>
+    
